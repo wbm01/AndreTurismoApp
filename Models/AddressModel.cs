@@ -36,11 +36,17 @@ namespace Models
         public AddressModel(AddressDTO addressDTO)
         {
             this.Street = addressDTO.Logradouro;
-            //this.Number = addressDTO.Number;
+            this.Number = addressDTO.Number;
             this.Neighborhood = addressDTO.Bairro;
             this.Cep = addressDTO.CEP;
+            this.Complement = addressDTO.Complemento;
             this.Id_City_Address = new CityModel { Description = addressDTO.City };
             this.DtRegister_Address = DateTime.Now;
+
+        }
+
+        public AddressModel()
+        {
 
         }
     }

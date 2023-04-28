@@ -9,10 +9,10 @@ namespace Models
 {
     public class TicketModel
     {
-        public static readonly string GETALL = "select t.Id_Ticket as [Ticket], a.Id_Address as [OTicket], a.Street as [AOrigin], a.Number as [ANumber],a.Neighborhood as [ANeighborhood], a.Cep as [ACep],a.Complement as [AComplement], a.DtRegister_Address as [ODtRegister], c.Description as [CityO],ad.Street as [DStreet],ad.Number as [DNumber],ad.Neighborhood as [DNeighborhood],ad.Cep as [DCep],ad.Complement as [DComplement], cd.Description as [CityD],cl.Name_Client as [ClientName],cl.Phone as [ClientPhone],t.Ticket_Value as [TicketValue] FROM Ticket t JOIN Address a on t.Id_Address_Origin = a.Id_Address JOIN City c on a.Id_City_Address = c.Id_City JOIN Address ad on t.Id_Address_Destiny = ad.Id_Address JOIN City cd on ad.Id_City_Address = cd.Id_City JOIN Client cl on t.Id_Client_Ticket = cl.Id_Client";
 
-        public static readonly string INSERT = "insert into Ticket (Id_Address_Origin, Id_Address_Destiny, Id_Client_Ticket, DtTicket, Ticket_Value) values (@Id_Address_Origin, @Id_Address_Destiny," +
-                    "@Id_Client_Ticket, @DtTicket, @Ticket_Value); Select cast(scope_identity() as int)";
+        public static readonly string GETALL = "select t.Id_Ticket, a.Id_Address, a.Street, a.Number, a.Neighborhood, a.Cep, a.Complement, a.DtRegister_Address, c.Id_City, c.Description, c.DtRegister_City, ad.Id_Address, ad.Street, ad.Number, ad.Neighborhood, ad.Cep, ad.Complement, ad.DtRegister_Address, ci.Id_City, ci.Description, ci.DtRegister_City, cl.Id_Client, cl.Name_Client, cl.Phone, adc.Id_Address, adc.Street, adc.Number, adc.Neighborhood, adc.Cep, adc.Complement, adc.DtRegister_Address, cic.Id_City, cic.Description, cic.DtRegister_City, t.Ticket_Value FROM Ticket t JOIN Address a on t.Id_Address_Origin = a.Id_Address JOIN City c on a.Id_City_Address = c.Id_City JOIN Address ad on t.Id_Address_Destiny = ad.Id_Address JOIN City ci on ad.Id_City_Address = ci.Id_City JOIN Client cl on t.Id_Client_Ticket = cl.Id_Client JOIN Address adc on cl.Id_Address_Client = adc.Id_Address JOIN City cic on adc.Id_City_Address = cic.Id_City";
+
+        public static readonly string INSERT = "insert into Ticket (Id_Address_Origin, Id_Address_Destiny, Id_Client_Ticket, DtTicket, Ticket_Value) values (@Id_Address_Origin, @Id_Address_Destiny, @Id_Client_Ticket, @DtTicket, @Ticket_Value); Select cast(scope_identity() as int)";
 
         public static readonly string DELETE = "delete from Ticket where Id_Ticket = @Id_Ticket";
 

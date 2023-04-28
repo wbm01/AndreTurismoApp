@@ -94,8 +94,8 @@ namespace AndreTurismoAplicationAddressService.Controllers
 
         // POST: api/AddressModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("{cep}")]
-        public async Task<ActionResult<AddressModel>> PostAddressModel(string cep, AddressModel addressModel)
+        [HttpPost("{cep}, {number}")]
+        public async Task<ActionResult<AddressModel>> PostAddressModel(string cep, string number, AddressModel addressModel)
         {
           if (_context.AddressModel == null)
           {
@@ -107,6 +107,7 @@ namespace AndreTurismoAplicationAddressService.Controllers
             AddressDTO addressDTO = new AddressDTO();
             addressDTO = _address.GetAddress(addressModel.Cep).Result;
             var addressComplete = new AddressModel(addressDTO);
+            addressComplete.Number = Convert.ToInt32(number); ;
 
             _context.AddressModel.Add(addressComplete);
             await _context.SaveChangesAsync();
