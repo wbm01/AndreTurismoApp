@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreTurismoAplicationAddressService.Data;
 using Models;
+using Models.DTO;
+using Services;
 
 namespace AndreTurismoAplicationAddressService.Controllers
 {
@@ -40,7 +42,7 @@ namespace AndreTurismoAplicationAddressService.Controllers
           {
               return NotFound();
           }
-            var addressModel = await _context.AddressModel.FindAsync(id);
+            var addressModel = await _context.AddressModel.Include(a => a.Id_City_Address).Where(a => a.Id_City_Address.Id_City == id).FirstOrDefaultAsync();
 
             if (addressModel == null)
             {
@@ -48,6 +50,13 @@ namespace AndreTurismoAplicationAddressService.Controllers
             }
 
             return addressModel;
+        }
+
+        [HttpGet("{cep:length(8)}")]
+        public ActionResult<AddressDTO> GetPostOffices(string cep)
+        {
+            //Exemplo de chamada de serviço - TESTE
+            return AddressServicePostOffice.GetAddress(cep).Result;
         }
 
         // PUT: api/AddressModels/5
@@ -90,6 +99,9 @@ namespace AndreTurismoAplicationAddressService.Controllers
           {
               return Problem("Entity set 'AndreTurismoAplicationAddressServiceContext.AddressModel'  is null.");
           }
+
+            //Chamar o servico de consulta de endereco ViaCEP
+
             _context.AddressModel.Add(addressModel);
             await _context.SaveChangesAsync();
 
