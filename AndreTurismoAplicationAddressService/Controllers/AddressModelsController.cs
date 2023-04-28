@@ -17,10 +17,12 @@ namespace AndreTurismoAplicationAddressService.Controllers
     public class AddressModelsController : ControllerBase
     {
         private readonly AndreTurismoAplicationAddressServiceContext _context;
+        private readonly AddressServicePostOffice _address;
 
-        public AddressModelsController(AndreTurismoAplicationAddressServiceContext context)
+        public AddressModelsController(AndreTurismoAplicationAddressServiceContext context, AddressServicePostOffice address)
         {
             _context = context;
+            _address = address;
         }
 
         // GET: api/AddressModels
@@ -56,7 +58,7 @@ namespace AndreTurismoAplicationAddressService.Controllers
         public ActionResult<AddressDTO> GetPostOffices(string cep)
         {
             //Exemplo de chamada de serviço - TESTE
-            return AddressServicePostOffice.GetAddress(cep).Result;
+            return _address.GetAddress(cep).Result;
         }
 
         // PUT: api/AddressModels/5
@@ -92,8 +94,8 @@ namespace AndreTurismoAplicationAddressService.Controllers
 
         // POST: api/AddressModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<AddressModel>> PostAddressModel(AddressModel addressModel)
+        [HttpPost("{cep}")]
+        public async Task<ActionResult<AddressModel>> PostAddressModel(string cep, AddressModel addressModel)
         {
           if (_context.AddressModel == null)
           {
@@ -101,11 +103,15 @@ namespace AndreTurismoAplicationAddressService.Controllers
           }
 
             //Chamar o servico de consulta de endereco ViaCEP
+            addressModel.Cep = cep;
+            AddressDTO addressDTO = new AddressDTO();
+            addressDTO = _address.GetAddress(addressModel.Cep).Result;
+            var addressComplete = new AddressModel(addressDTO);
 
-            _context.AddressModel.Add(addressModel);
+            _context.AddressModel.Add(addressComplete);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAddressModel", new { id = addressModel.Id_Address }, addressModel);
+            return addressComplete;
         }
 
         // DELETE: api/AddressModels/5

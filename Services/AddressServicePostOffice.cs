@@ -11,7 +11,7 @@ namespace Services
     public class AddressServicePostOffice
     {
         static readonly HttpClient endereco = new HttpClient();
-        public static async Task<AddressDTO> GetAddress(string cep)
+        public async Task<AddressDTO> GetAddress(string cep)
         {
             try
             {

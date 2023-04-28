@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Models.DTO;
 
 namespace Models
 {
@@ -30,5 +31,17 @@ namespace Models
         public CityModel Id_City_Address { get; set; }
 
         public DateTime DtRegister_Address { get; set; }
+
+
+        public AddressModel(AddressDTO addressDTO)
+        {
+            this.Street = addressDTO.Logradouro;
+            //this.Number = addressDTO.Number;
+            this.Neighborhood = addressDTO.Bairro;
+            this.Cep = addressDTO.CEP;
+            this.Id_City_Address = new CityModel { Description = addressDTO.City };
+            this.DtRegister_Address = DateTime.Now;
+
+        }
     }
 }
