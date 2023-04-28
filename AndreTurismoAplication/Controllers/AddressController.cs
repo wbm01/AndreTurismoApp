@@ -21,9 +21,10 @@ namespace TurismoComDapper.Controllers
         }
 
 
-        [HttpPost(Name = "InsertAddress")]
+        [HttpPost("cep", Name = "InsertAddress")]
         public AddressModel Insert(AddressModel address)
         {       
+   
             address.Id_City_Address = (address.Id_City_Address.Id_City == 0) ? _cityService.Insert(address.Id_City_Address) : _cityService.FindById(address.Id_City_Address.Id_City);
 
             return _addressService.Insert(address);
