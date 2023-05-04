@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
+using Newtonsoft.Json;
 using Repositories;
 
 namespace Services
@@ -45,6 +46,22 @@ namespace Services
         public CityModel FindById(int id)
         {
             return new CityRepository().FindById(id);
+        }
+
+        static readonly HttpClient cityClient = new HttpClient();
+        public async Task<List<CityModel>> Get()
+        {
+            try
+            {
+                HttpResponseMessage response = await CityService.cityClient.GetAsync("https://localhost:7230/api/Cities");
+                response.EnsureSuccessStatusCode();
+                string city = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<CityModel>>(city);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
     }
 }

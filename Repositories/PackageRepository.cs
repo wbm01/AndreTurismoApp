@@ -89,12 +89,24 @@ namespace Repositories
 
         public PackageModel FindById(int id)
         {
+            var results = new List<PackageModel>();
             using (var db = new SqlConnection(_conn))
             {
-                var packageLst = db.Query<PackageModel>(PackageModel.GETALL);
+                results = db.Query<PackageModel, HotelModel, AddressModel, CityModel, TicketModel, ClientModel, PackageModel>(PackageModel.GETALL,
+                    (package, hotel, addressHotel, cityHotel, ticket, client) =>
+                    {
 
-                return packageLst.First();
+                        package.Id_Hotel_Package = hotel;
+                        package.Id_Hotel_Package.Id_Address_Hotel = addressHotel;
+                        package.Id_Hotel_Package.Id_Address_Hotel.Id_City_Address = cityHotel;
+                        package.Id_Ticket_Package = ticket;
+                        package.Id_Client_Package = client;
+
+                        return package;
+                    },
+                    splitOn: "Id_Hotel, Id_Address, Id_City, Id_Ticket, Id_Client").ToList();
             }
+            return results.First();
         }
 
         public PackageModel Insert(PackageModel package)

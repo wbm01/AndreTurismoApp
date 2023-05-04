@@ -26,5 +26,23 @@ namespace Models.DTO
         public int Number { get; set; }
         [JsonProperty("complemento")]
         public string Complemento { get; set; }
+
+
+        /*public Address(AddressModel addressDTO)
+        {
+            this.Street = addressDTO.Logradouro;
+            this.Number = addressDTO.Number;
+            this.Neighborhood = addressDTO.Bairro;
+            this.Cep = addressDTO.CEP;
+            this.Complement = addressDTO.Complemento;
+            this.Id_City_Address = new City { Description = addressDTO.City };
+            this.DtRegister_Address = DateTime.Now;
+
+        }*/
+
+        /*public Address()
+        {
+
+        }*/
     }
 }

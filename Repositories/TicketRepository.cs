@@ -88,12 +88,23 @@ namespace Repositories
 
         public TicketModel FindById(int id)
         {
+            var results = new List<TicketModel>();
             using (var db = new SqlConnection(_conn))
             {
-                var ticketLst = db.Query<TicketModel>(TicketModel.GETALL);
+                results = db.Query<TicketModel, AddressModel, CityModel, AddressModel, CityModel, ClientModel, TicketModel>(TicketModel.GETALL,
+                    (ticket, origin, cityOrigin, destination, cityDestination, client) =>
+                    {
 
-                return ticketLst.First();
+                        ticket.Id_Address_Origin = origin;
+                        ticket.Id_Address_Origin.Id_City_Address = cityOrigin;
+                        ticket.Id_Address_Destiny = destination;
+                        ticket.Id_Address_Destiny.Id_City_Address = cityDestination;
+                        ticket.Id_Client_Ticket = client;
+                        return ticket;
+                    },
+                    splitOn: "Id_Address, Id_City, Id_Address, Id_City, Id_Client, Id_Address, Id_City").ToList();
             }
+            return results.First();
         }
 
         public TicketModel Insert(TicketModel ticket)

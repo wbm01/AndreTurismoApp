@@ -5,15 +5,13 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoAplication", "AndreTurismoAplication\AndreTurismoAplication.csproj", "{AB5BA23E-4792-4BF7-BA81-8CA1534C5F3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoAplicationAddressService", "AndreTurismoAplicationAddressService\AndreTurismoAplicationAddressService.csproj", "{FA171C38-BDEF-42DB-A779-8380747C63F0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{8794FB69-B43B-4E60-ACAC-4C3F54B9EE67}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{D30BB33A-E3CA-42BA-87D4-BE9FBC4F6976}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{40993A13-3B9F-4AC5-850D-B2DCE55C8291}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoADO", "AndreTurismoADO\AndreTurismoADO.csproj", "{5CA52B66-C877-4A63-905E-6851F9E264B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoADO", "AndreTurismoADO\AndreTurismoADO.csproj", "{5CA52B66-C877-4A63-905E-6851F9E264B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{AB5BA23E-4792-4BF7-BA81-8CA1534C5F3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB5BA23E-4792-4BF7-BA81-8CA1534C5F3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB5BA23E-4792-4BF7-BA81-8CA1534C5F3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA171C38-BDEF-42DB-A779-8380747C63F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA171C38-BDEF-42DB-A779-8380747C63F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA171C38-BDEF-42DB-A779-8380747C63F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA171C38-BDEF-42DB-A779-8380747C63F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8794FB69-B43B-4E60-ACAC-4C3F54B9EE67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8794FB69-B43B-4E60-ACAC-4C3F54B9EE67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8794FB69-B43B-4E60-ACAC-4C3F54B9EE67}.Release|Any CPU.ActiveCfg = Release|Any CPU
